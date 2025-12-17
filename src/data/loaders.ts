@@ -1,23 +1,10 @@
 import qs from 'qs'
 import { getStrapiURL } from '@/lib/utils'
 
-const baseUrl = getStrapiURL()
-
 async function fetchData(url: string) {
-  const authToken = null // we will implement this later getAuthToken() later
-  const headers = {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${authToken}`,
-    },
-  }
-
   try {
-    const response = await fetch(url, authToken ? headers : {})
+    const response = await fetch(url)
     const data = await response.json()
-    // console.log('data', data.data.blocks)
-
     return data
   } catch (error) {
     console.error('Error fetching data:', error)
@@ -26,18 +13,19 @@ async function fetchData(url: string) {
 }
 
 export async function getAllServicesSlugs() {
+  const baseUrl = getStrapiURL()
+  if (!baseUrl) return null
+
   const url = new URL('/api/services', baseUrl)
+  url.search = qs.stringify({ fields: ['slug'] })
 
-  url.search = qs.stringify({
-    fields: ['slug'],
-  })
-
-  const data = await fetchData(url.href)
-
-  return data
+  return await fetchData(url.href)
 }
 
 export async function getGlobalPageMetadata() {
+  const baseUrl = getStrapiURL()
+  if (!baseUrl) return null
+
   const url = new URL('/api/global', baseUrl)
 
   url.search = qs.stringify({
@@ -48,6 +36,9 @@ export async function getGlobalPageMetadata() {
 }
 
 export async function getGlobalData() {
+  const baseUrl = getStrapiURL()
+  if (!baseUrl) return null
+
   const url = new URL('/api/global', baseUrl)
 
   url.search = qs.stringify({
@@ -92,6 +83,9 @@ export async function getGlobalData() {
 }
 
 export async function getHomePageData() {
+  const baseUrl = getStrapiURL()
+  if (!baseUrl) return null
+
   const url = new URL('/api/home-page', baseUrl)
 
   url.search = qs.stringify({
@@ -185,6 +179,9 @@ export async function getHomePageData() {
 }
 
 export async function getAboutUsData() {
+  const baseUrl = getStrapiURL()
+  if (!baseUrl) return null
+
   const url = new URL('/api/about-us', baseUrl)
 
   url.search = qs.stringify({
@@ -247,6 +244,9 @@ export async function getAboutUsData() {
 }
 
 export async function getGalleryData() {
+  const baseUrl = getStrapiURL()
+  if (!baseUrl) return null
+
   const url = new URL('/api/gallery-component', baseUrl)
 
   url.search = qs.stringify({
@@ -296,6 +296,9 @@ export async function getGalleryData() {
 }
 
 export async function getServicePageData(slug: string) {
+  const baseUrl = getStrapiURL()
+  if (!baseUrl) return null
+
   const url = new URL(`/api/services`, baseUrl)
 
   url.search = qs.stringify({
@@ -356,6 +359,9 @@ export async function getServicePageData(slug: string) {
 }
 
 export async function getServicesData() {
+  const baseUrl = getStrapiURL()
+  if (!baseUrl) return null
+
   const url = new URL('/api/service-page', baseUrl)
 
   url.search = qs.stringify({
@@ -427,6 +433,9 @@ export async function getServicesData() {
 }
 
 export async function getContactPageData() {
+  const baseUrl = getStrapiURL()
+  if (!baseUrl) return null
+
   const url = new URL('/api/contact', baseUrl)
 
   url.search = qs.stringify({
