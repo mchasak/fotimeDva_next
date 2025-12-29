@@ -19,6 +19,19 @@ export interface Logo {
 
 export interface Items {
   index: number
-  icon: 'calendar' | 'camera' | 'edit' | 'cloud'
+  icon:
+    | 'calendar'
+    | 'camera'
+    | 'edit'
+    | 'cloud'
+    | 'archive'
+    | 'image'
+    | 'folder'
+    | 'hourglass'
+    | 'people'
+    | 'group'
+    | 'calendar1'
+    | 'compass'
+    | 'map'
   item: string
 }

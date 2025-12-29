@@ -95,15 +95,15 @@ export const ContactForm = ({ title, socials }: Readonly<ContactFormProps>) => {
           onClose={() => setSnackbar((prev) => ({ ...prev, open: false }))}
         />
       </form>
-      {Array.isArray(socials) && socials?.length ? (
-        <div className="mt-10 flex justify-center gap-4">
+      {Array.isArray(socials) && socials.length ? (
+        <div className="mx-auto mt-10 flex max-w-[200px] justify-between">
           {socials.map((link) => (
             <Link
               key={link.link?.id}
               href={link.link?.url}
-              className="relative h-[40px] w-[40px] duration-500 hover:scale-150"
+              className="flex items-center transition-transform duration-300 hover:scale-125"
             >
-              <Icon icon={link.icon} className="absolute h-full w-min" />
+              <Icon icon={link.icon} className="h-10 w-auto" />
             </Link>
           ))}
         </div>
