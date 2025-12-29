@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Button } from '@/components/ui/button'
+// import { Button } from '@/components/ui/button'
 import Icon from './ui/Icon'
 import { ServicesProps } from '@/types/blocks'
 import { StrapiImage } from './StrapiImage'

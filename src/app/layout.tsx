@@ -21,8 +21,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const metadata = await getGlobalPageMetadata()
 
   return {
-    title: metadata?.data?.title ?? 'Fotíme Dva',
-    description: metadata?.data?.description ?? 'description',
+    title: metadata.title,
+    description: metadata.description,
   }
 }
 

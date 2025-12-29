@@ -23,16 +23,40 @@ export async function getAllServicesSlugs() {
 }
 
 export async function getGlobalPageMetadata() {
+  const fallback = {
+    title: 'Fotíme Dva',
+    description: 'Profesionální focení',
+  }
+
   const baseUrl = getStrapiURL()
-  if (!baseUrl) return null
+  if (!baseUrl) {
+    console.warn('NEXT_PUBLIC_STRAPI_URL is missing')
+    return fallback
+  }
 
-  const url = new URL('/api/global', baseUrl)
+  try {
+    const url = new URL('/api/global', baseUrl)
 
-  url.search = qs.stringify({
-    fields: ['title', 'description'],
-  })
+    url.search = qs.stringify({
+      fields: ['title', 'description'],
+    })
 
-  return await fetchData(url.href)
+    const res = await fetch(url.href, {
+      next: { revalidate: 60 },
+    })
+
+    if (!res.ok) return fallback
+
+    const json = await res.json()
+
+    return {
+      title: json?.data?.attributes?.title ?? fallback.title,
+      description: json?.data?.attributes?.description ?? fallback.description,
+    }
+  } catch (err) {
+    console.error('Metadata fetch failed:', err)
+    return fallback
+  }
 }
 
 export async function getGlobalData() {
