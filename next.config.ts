@@ -7,11 +7,15 @@ const nextConfig: NextConfig = {
         protocol: 'http',
         hostname: 'localhost',
         port: '1337',
-        pathname: '/uploads/**/*',
+        // pathname: '/uploads/**/*',
       },
+      // {
+      //   protocol: 'https',
+      //   hostname: 'placeholder.co',
+      // },
       {
         protocol: 'https',
-        hostname: 'placeholder.co',
+        hostname: 'res.cloudinary.com',
       },
     ],
   },
